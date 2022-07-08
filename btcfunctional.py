@@ -1,5 +1,7 @@
+from email.mime import application
+
 import telegram
-from telegram.ext import Updater
+from telegram.ext import Updater, CallbackQueryHandler
 from telegram.ext import CommandHandler
 from tracksys import get_prices
 
@@ -20,7 +22,6 @@ def prices(update, context):
         change_hour = crypto_data[i]["change_hour"]
         message += f"Coin: {coin}\nPrice: ${price:,.2f}\nHour Change: {change_hour:.3f}%\nDay Change: {change_day:.3f}%\n\n"
     context.bot.send_message(chat_id=chat_id, text=message)
-
 
 dispatcher.add_handler(CommandHandler("GetPrices", prices))
 updater.start_polling()
